@@ -1,27 +1,61 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fancy Form</title>
-
-  <!-- You may add more stuff here -->
+  <title>Fancy Form - Currency Swap</title>
   <link href="style.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
-
 <body>
+  <div class="swap-container">
+    <form id="swap-form">
+      <h4 class="title">Swap</h4>
 
-  <!-- You may reorganise the whole HTML, as long as your form achieves the same effect. -->
-  <form onsubmit="return !1">
-    <h5>Swap</h5>
-    <label for="input-amount">Amount to send</label>
-    <input id="input-amount" />
+      <!-- Shown only when the price feed fails to load -->
+      <div class="global-error" id="global-error" style="display: none;" role="alert">
+        <span id="global-error-text"></span>
+        <button type="button" id="retry-btn">Retry</button>
+      </div>
 
-    <label for="output-amount">Amount to receive</label>
-    <input id="output-amount" />
+      <!-- Amount to send -->
+      <div class="input-group">
+        <label for="input-amount">Amount to send</label>
+        <div class="input-wrapper">
+          <input type="number" id="input-amount" placeholder="0.0" step="any" required disabled />
+          <div class="currency-selector">
+            <img id="input-icon" src="" alt="" style="display: none;" />
+            <select id="input-currency" required disabled>
+              <option value="" disabled selected>Loading...</option>
+            </select>
+          </div>
+        </div>
+        <div class="error-msg" id="input-error"></div>
+      </div>
 
-    <button>CONFIRM SWAP</button>
-  </form>
-  <script src="script.js"></script>
+      <!-- Swap Icon -->
+      <div class="swap-icon-container">
+        <button type="button" class="swap-btn" id="swap-btn" disabled>⇅</button>
+      </div>
+
+      <!-- Amount to receive -->
+      <div class="input-group">
+        <label for="output-amount">Amount to receive</label>
+        <div class="input-wrapper">
+          <input type="number" id="output-amount" placeholder="0.0" readonly />
+          <div class="currency-selector">
+            <img id="output-icon" src="" alt="" style="display: none;" />
+            <select id="output-currency" required disabled>
+              <option value="" disabled selected>Loading...</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" id="submit-btn" disabled>CONFIRM SWAP</button>
+      <div class="success-msg" id="success-message" style="display: none;">Swap successful!</div>
+    </form>
+  </div>
+  <script type="module" src="./script.js"></script>
 </body>
-
 </html>
