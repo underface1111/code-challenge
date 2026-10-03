@@ -18,6 +18,7 @@ const els = {
   swapBtn: document.getElementById('swap-btn'),
   submitBtn: document.getElementById('submit-btn'),
   successMsg: document.getElementById('success-message'),
+  rateDisplay: document.getElementById('rate-display'),
 };
 
 // Fetch token prices and populate dropdowns
@@ -119,19 +120,14 @@ function calculateOutput() {
   const outputCurrency = els.outputCurrency.value;
 
   if (!inputCurrency || !outputCurrency) {
+    els.rateDisplay.textContent = "";
     return;
   }
 
   if (inputCurrency === outputCurrency) {
     els.inputError.textContent = "Please choose two different tokens.";
     els.outputAmount.value = "";
-    els.submitBtn.disabled = true;
-    return;
-  }
-
-  if (isNaN(inputAmount) || inputAmount <= 0) {
-    els.inputError.textContent = "Please enter a valid amount.";
-    els.outputAmount.value = "";
+    els.rateDisplay.textContent = "";
     els.submitBtn.disabled = true;
     return;
   }
@@ -141,6 +137,18 @@ function calculateOutput() {
 
   if (!inputPrice || !outputPrice) {
     els.inputError.textContent = "Price data unavailable for selected tokens.";
+    els.rateDisplay.textContent = "";
+    els.submitBtn.disabled = true;
+    return;
+  }
+
+  // Show the exchange rate as soon as both tokens are picked, even before an amount is typed.
+  const rate = inputPrice / outputPrice;
+  els.rateDisplay.textContent = `1 ${inputCurrency} ≈ ${rate.toFixed(6)} ${outputCurrency}`;
+
+  if (isNaN(inputAmount) || inputAmount <= 0) {
+    els.inputError.textContent = "Please enter a valid amount.";
+    els.outputAmount.value = "";
     els.submitBtn.disabled = true;
     return;
   }

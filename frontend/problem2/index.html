@@ -22,7 +22,7 @@
       <div class="input-group">
         <label for="input-amount">Amount to send</label>
         <div class="input-wrapper">
-          <input type="number" id="input-amount" placeholder="0.0" step="any" required disabled />
+          <input type="number" id="input-amount" placeholder="0.0" step="any" min="0" required disabled />
           <div class="currency-selector">
             <img id="input-icon" src="" alt="" style="display: none;" />
             <select id="input-currency" required disabled>
@@ -30,7 +30,7 @@
             </select>
           </div>
         </div>
-        <div class="error-msg" id="input-error"></div>
+        <div class="error-msg" id="input-error" role="alert" aria-live="polite"></div>
       </div>
 
       <!-- Swap Icon -->
@@ -51,6 +51,8 @@
           </div>
         </div>
       </div>
+
+      <div class="rate-display" id="rate-display" aria-live="polite"></div>
 
       <button type="submit" id="submit-btn" disabled>CONFIRM SWAP</button>
       <div class="success-msg" id="success-message" style="display: none;">Swap successful!</div>

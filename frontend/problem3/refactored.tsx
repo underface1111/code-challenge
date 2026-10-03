@@ -70,8 +70,10 @@ const WalletPage: React.FC<Props> = (props: Props) => {
     return (
       <WalletRow
         className={classes.row}
-        // 11. Used `balance.currency` as key instead of index to prevent re-rendering issues when array shifts.
-        key={balance.currency}
+        // 11. Used a stable key instead of index to prevent re-rendering issues when array shifts.
+        //     Composite of blockchain+currency (not currency alone) since the same currency
+        //     symbol can legitimately appear once per chain (e.g. USDC on both Ethereum and Arbitrum).
+        key={`${balance.blockchain}-${balance.currency}`}
         amount={balance.amount}
         usdValue={usdValue}
         formattedAmount={balance.formatted}

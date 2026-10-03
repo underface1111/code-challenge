@@ -151,6 +151,14 @@ input[type="number"]::placeholder {
   margin-top: 4px;
 }
 
+.rate-display {
+  color: #6b7280;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 4px;
+  min-height: 16px;
+}
+
 .global-error {
   display: flex;
   align-items: center;
